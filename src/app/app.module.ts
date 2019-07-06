@@ -1,18 +1,45 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { AppErrorHandler } from "./common/app-error-handler";
+import { PostService } from "./services/post.service";
+import { AuthorsService } from "./authors.service";
+import { CoursesService } from "./courses.service";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgModule, ErrorHandler } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { CoursesComponent } from "./courses.component";
+import { CourseComponent } from "./course/course.component";
+import { AuthorsComponent } from "./authors/authors.component";
+import { ContactFormComponent } from "./contact-form/contact-form.component";
+import { NewCourseFormComponent } from "./new-course-form/new-course-form.component";
+import { SignupFormComponent } from "./signup-form/signup-form.component";
+import { ChangePasswordComponent } from "./change-password/change-password.component";
+import { PostsComponent } from "./posts/posts.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignupFormComponent,
+    CoursesComponent,
+    CourseComponent,
+    AuthorsComponent,
+    ContactFormComponent,
+    NewCourseFormComponent,
+    ChangePasswordComponent,
+    PostsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  providers: [
+    CoursesService,
+    AuthorsService,
+    PostService,
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler
+    }
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
